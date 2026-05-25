@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Weather System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<h1>🌦 AI Weather Prediction</h1>
+<p class="subtitle">Smart AI-based weather intelligence</p>
+
+<form method="POST" action="/predict">
+
+<div class="input-grid">
+    <input type="text" name="temp" placeholder="Temperature" required>
+    <input type="text" name="dew" placeholder="Dew Point" required>
+    <input type="text" name="humidity" placeholder="Humidity %" required>
+    <input type="text" name="wind" placeholder="Wind Speed" required>
+    <input type="text" name="visibility" placeholder="Visibility" required>
+    <input type="text" name="pressure" placeholder="Pressure" required>
+</div>
+
+<button type="submit">Predict</button>
+
+</form>
+
+{% if prediction %}
+<div class="result-card">
+    <h2>🌡 {{ prediction.temperature }} °C</h2>
+    <h3>🌦 {{ prediction.weather }}</h3>
+    <p>📊 {{ prediction.rmse }}</p>
+    <p>🎯 Confidence: ±{{ prediction.confidence }}</p>
+</div>
+{% endif %}
+
+{% if error %}
+<p style="color:red;">Error: {{ error }}</p>
+{% endif %}
+
+</div>
+
+</body>
+</html>
